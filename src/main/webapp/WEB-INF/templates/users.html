@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All users</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div>
+        <h1>Список пользователей</h1>
+    </div>
+
+    <br/><br/>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Операции</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">Id</td>
+            <td th:text="${user.firstName}">Name</td>
+            <td th:text="${user.lastName}">LastName</td>
+            <td th:text="${user.age}">Age</td>
+            <td>
+                <button th:href="@{/users/edit(id=${user.getId})}"
+                        onclick="window.location.href=(this.getAttribute('href'))">Изменить
+                </button>
+
+                <button th:href="@{/users/deleteUser(id=${user.id})}"
+                        onclick="window.location.href=(this.getAttribute('href'))">Удалить
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <a th:href="@{/users/addNewUser}">Добавить нового пользователя</a>
+    </div>
+</div>
+</body>
+</html>
